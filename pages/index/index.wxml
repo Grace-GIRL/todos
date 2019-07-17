@@ -1,0 +1,30 @@
+<!--index.wxml-->
+<view class="container">
+  <!-- <view class="userinfo"> -->
+    <!-- <open-data type="groupName" open-gid="xxxxxx"></open-data> -->
+    <!-- <open-data type="userAvatarUrl"></open-data> -->
+    <!-- <open-data type="userGender" lang="zh_CN"></open-data> -->
+  <!-- </view> -->
+  <view class="header">
+    <image src="../../images/plus.png" id="add" bindtap='addTodoHandler'></image>
+    <input type="text" placeholder='Anything Here ...' value='{{input}}'  bindinput="inputChangeHandler"  bindconfirm="addTodoHandler"></input>
+  </view>
+  <block wx:if="{{todos.length}}">
+    <view class="todos">
+      <view class="{{item.completed? 'completed':''}}" wx:for="{{todos}}" wx:key="{{index}}" bindtap="toggleTodoHandler" data-index="{{index}}">
+        <icon type="{{item.completed ? 'success':'waiting'}}" size="20" ></icon>
+        <text>{{item.name}}</text>
+        <icon type="clear" size="16" catchtap="removeTodoHandler" data-index="{{index}}"></icon>
+      </view>
+    </view>
+    <view class="footer">
+      <text bindtap="toggleAllHandler">Toggle all</text>
+      <text wx:if='{{leftCount}}'> {{leftCount}} {{leftCount>1 ? 'items':'item'}} left</text>
+      <text bindtap="clearHandle">Clear completed</text>
+    </view>
+  </block>
+  <view wx:else class="null">
+    <text>Congratulations</text>
+  </view>
+
+</view>
